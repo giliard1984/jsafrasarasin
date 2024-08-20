@@ -1,0 +1,7 @@
+{
+  "users": [
+    { "id": 1, "email": "giliard1984@gmail.com", "password": "1234", "createdAt": "20240820"}
+  ],
+  "questionPools": [],
+  "userPool": []
+}
