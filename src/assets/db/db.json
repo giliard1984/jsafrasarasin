@@ -1,6 +1,23 @@
 {
   "users": [
-    { "id": 1, "email": "giliard1984@gmail.com", "password": "1234", "createdAt": "20240820"}
+    {
+      "id": "32c913d8-5b26-4c2e-813c-e35a223c6a73",
+      "email": "giliard1984@gmail.com",
+      "firstName": "Giliard",
+      "lastName": "Gomes",
+      "password": "$2a$10$zTjb/eBz8mrDFdGtm5vqp.JRDwusyIDd5UZYL.lhgZw/3UJ/4pN3a",
+      "role": "admin",
+      "createdAt": "2024-08-21T09:32:52.692Z"
+    },
+    {
+      "id": "3f66d43c-759a-483c-9ce0-91be8a36bb02",
+      "email": "giliard.alves@gmail.com",
+      "firstName": "Giliard",
+      "lastName": "Gomes",
+      "password": "$2a$10$zTjb/eBz8mrDFdGtm5vqp.JRDwusyIDd5UZYL.lhgZw/3UJ/4pN3a",
+      "role": "user",
+      "createdAt": "2024-08-21T09:32:52.692Z"
+    }
   ],
   "questionPools": [],
   "userPool": []

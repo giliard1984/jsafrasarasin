@@ -20,8 +20,8 @@ const DefaultLayout: React.FC = () => {
     <ConfigProvider
       theme={{ components: { Layout: { bodyBg: "transparent", headerBg: "#fff" } } }}
     >
-      <Layout>
-        <Content>
+      <Layout className={styles.layout}>
+        <Content className={styles.content}>
           <div
             className={styles.outletWrapper}
             style={{ borderRadius: borderRadiusLG }}

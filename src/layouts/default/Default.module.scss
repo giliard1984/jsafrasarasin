@@ -1,12 +1,19 @@
+.layout {
+  display: flex;
+  place-items: center;
+  padding: 2rem;
+}
+
 .content {
-  padding: 48px 0px;
+  display: flex;
+  text-align: center;
+  place-items: center;
   min-height: 100dvh;
 }
 
-.outletWrapper {
-  padding: 56px;
-  background-color: #fcfcfc;
-  // max-width: 1280px;
-  // min-height: 90dvh;
-  // margin: 0 auto;
+@media all and (min-width: 450px) {
+  .outletWrapper {
+    padding: 3.5rem;
+    background-color: #fcfcfc;
+  }
 }

@@ -7,6 +7,9 @@ export default function useFetch <T,>(url: string, method = "GET"/* , body?: any
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    // if the url is not passed, then the request is not made
+    if (!url || url === null) return;
+
     setLoading(true);
 
     fetch(url, {

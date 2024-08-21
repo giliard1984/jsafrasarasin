@@ -1,14 +1,15 @@
 // this context api is responsible for managing the main
 // information related to the application
 import { createContext, useState } from "react";
-// import useFetch from "@hooks/useFetch";
 
-// import type { Video } from "@definitions/global";
+import type { Session } from "@definitions/global";
 
 const AppContextValue = {
   // loading: false,
   // error: null as Error | null,
+  session: undefined as Session | undefined,
   activeQuestionPool: {} as any,
+  setSession: (_value: Session) => {},
   setActiveQuestionPool: (_value: string) => {},
  };
 
@@ -19,6 +20,7 @@ type Props = {
 const AppContext = createContext(AppContextValue);
 
 const AppProvider = ({ children }: Props) => {
+  const [session, setSession] = useState(); // this is the user's session
   const [activeQuestionPool, setActiveQuestionPool] = useState({});
 
   return (
@@ -26,6 +28,8 @@ const AppProvider = ({ children }: Props) => {
       value={{
         // loading,
         // error,
+        session,
+        setSession,
         activeQuestionPool,
         setActiveQuestionPool
       }}

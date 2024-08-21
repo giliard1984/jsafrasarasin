@@ -1,6 +1,9 @@
-import React, { createContext, useState, useMemo/*, useContext */ } from "react";
+import React, { createContext, useState, useMemo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-// import { AppContext } from "@contexts/AppContext";
+// import useFetch from "@hooks/useFetch";
+import dayjs from "dayjs";
+import { AppContext } from "@contexts/AppContext";
+import { doesPasswordMatch } from "@/helpers/password";
 import { Row, Col, Input, Button, notification, type NotificationArgsProps } from "antd";
 import { MailOutlined, LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
 
@@ -17,11 +20,12 @@ const LoginPage: React.FC = () => {
   const [credential, setCredential] = useState({ email: null, password: null });
   const [isValidated, setIsValidated] = useState<boolean | undefined>();
   // retrieved states and methods associated with the app context
-  // const {
-  //   loading,
-  //   error,
-  //   data
-  // } = useContext(AppContext);
+  const {
+    // loading,
+    // error,
+    // session,
+    setSession
+  } = useContext(AppContext);
 
   const handleSignIn = () => {
     // validates the credential information at the frontend level
@@ -30,10 +34,43 @@ const LoginPage: React.FC = () => {
       openNotification("error", "Error", "Your email or password might not exist", "topRight");
     }
 
-    // TODO: send the crendential to the endpoint, to validate the user
-    // TODO: if the credential is valid, then store it to the sessionStorage and ContextApi -> session
-    // TODO: considering everything is okay, then redirect user
-    navigate("/user");
+    // fetch the user's credential, considering the user does exist
+    // moving this to the backend, the response should be an object instead of array of objects
+    // fetch(`http://localhost:5183/users?email=${credential.email}`, {
+    fetch(`http://giliards-macbook-pro-2.local:5183/users?email=${credential.email}`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+      // console.log(json);
+      const isValid = doesPasswordMatch(credential.password, json[0]?.password);
+
+      // TODO: if the credential is valid, then store it to the sessionStorage and ContextApi -> session
+
+      // when the credential has been verified, than based on the role, redirect them on to their page
+      if (isValid) {     
+        setSession({
+          email: json[0].email,
+          firstName: json[0].firstName,
+          lastName: json[0].lastName,
+          createdAt: json[0].createdAt,
+          loggedIn: dayjs().toISOString()
+        });
+
+        json[0].role === "user" ? navigate("/user") : navigate("/admin");
+      }
+
+      openNotification("error", "Credential", "The requested email is unavailable", "topRight");
+    })
+    .catch((e: Error) => {
+      // TODO: handle the error message
+      console.log(e);
+    })
+    .finally(() => console.log(false));
   };
 
   const openNotification = (
@@ -57,7 +94,7 @@ const LoginPage: React.FC = () => {
       <div className={styles.wrapper}>
         <Row gutter={[0, 16]} justify="start" align="middle">
           <Col span={24}>
-            <img src="./jsafrasarasin-logo.png" />
+            <img src="./jsafrasarasin-logo.png" style={{ maxWidth: "320px" }} />
           </Col>
           <Col span={24} className={styles.positionToLeft}>
             <label>Email</label>
