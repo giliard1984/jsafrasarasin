@@ -51,6 +51,9 @@ const AdminLayout: React.FC = () => {
                   </div>
               }
             </div>
+
+            {/* TODO: Move the onClick navigate to a lookup (switch) */}
+            {/* TODO: If it is possible to extend the menu item to bring a new attr called url/path, that would be perfect */}
             <Menu
               theme="dark"
               mode="inline"
@@ -73,11 +76,11 @@ const AdminLayout: React.FC = () => {
                 },
               ]}
               style={{ marginTop: 10 }}
-              onClick={({ key }) => key === "1" ? navigate("/admin") : navigate("/admin/manage")}
+              onClick={({ key }) => key === "1" ? navigate("/admin-panel") : navigate("/quiz/manage")}
             />
         </Sider>
         <Layout>
-          <Header style={{ padding: 0, background: colorBgContainer, borderBottom: "1px solid #f6f6f6" }}>
+          <Header style={{ padding: "0px 16px", background: colorBgContainer, borderBottom: "1px solid #f6f6f6" }}>
             <Button
               type="text"
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
