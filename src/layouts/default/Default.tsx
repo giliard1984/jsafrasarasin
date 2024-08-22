@@ -1,25 +1,31 @@
-import React/* , { useContext } */ from "react";
-import { Row, Col, Layout, theme, ConfigProvider, Input, FloatButton, Switch } from 'antd';
-// import { SearchOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import React from "react";
+import { Menu, Layout, theme, ConfigProvider, FloatButton } from 'antd';
 import { Outlet } from "react-router-dom";
-// import { AppContext } from "@contexts/AppContext";
 
 import styles from "./Default.module.scss";
 
-const { /* Header, */ Content } = Layout;
+const { Header, Content } = Layout;
 
 const DefaultLayout: React.FC = () => {
   const { token: { borderRadiusLG } } = theme.useToken(); // antd token
-
-  // retrieved states and methods associated with the app context
-  // const {
-  // } = useContext(AppContext);
 
   return (
     // defining the layout theme
     <ConfigProvider
       theme={{ components: { Layout: { bodyBg: "transparent", headerBg: "#fff" } } }}
     >
+      <Header className={styles.header}>
+        <Menu
+          theme="light"
+          mode="horizontal"
+          defaultSelectedKeys={['quiz']}
+          items={[
+            { key: "quiz", label: "Quiz"},
+            { key: "history", label: "History", disabled: true}
+          ]}
+          style={{ flex: 1, minWidth: 0, padding: "0px 20%" }}
+        />
+      </Header>
       <Layout className={styles.layout}>
         <Content className={styles.content}>
           <div

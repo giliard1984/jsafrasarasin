@@ -61,7 +61,7 @@ const LoginPage: React.FC = () => {
           loggedIn: dayjs().toISOString()
         });
 
-        json[0].role === "user" ? navigate("/user") : navigate("/admin-panel");
+        json[0].role === "user" ? navigate("/quiz") : navigate("/admin-panel");
       }
 
       openNotification("error", "Credential", "The requested email is unavailable", "topRight");
