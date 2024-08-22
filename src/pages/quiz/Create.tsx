@@ -1,22 +1,29 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
-import { Row, Col, Button, Input, Select, Card, Statistic, Divider } from "antd";
+import { Row, Col, Button, Select, Statistic } from "antd";
 import { LikeOutlined, DislikeOutlined } from "@ant-design/icons";
 import PageTitle from "@/components/pageTitle/PageTitle";
 import QuestionDesign from "@/components/questionDesign/QuestionDesign";
 import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
 import { v4 as uuidv4 } from "uuid";
 
-// const { TextArea } = Input;
+dayjs.extend(weekOfYear);
+
+const referenceList = Array.from({ length: 52}, (value, index) => ({ "value": index + 1, "label": `Week ${index + 1}`, "disabled": (index + 1) < dayjs().week() }));
 
 const CreateQuiz: React.FC = () => {
   // const navigate = useNavigate();
 
   const [componentsList, setComponentsList] = useState([]); // list of components presented on the screen
   const [quiz, setQuiz] = useState({
-    reference: 23,
+    reference: dayjs().week(),
     questions: []
   });
+
+  const handleReferenceChange = (value: string) => {
+    setQuiz((oldObj: any) => ({ ...oldObj, reference: value}));
+  };
 
   // listen for changes in the question design components, and update the quiz object
   // that will be the one being saved as a template
@@ -80,7 +87,7 @@ const CreateQuiz: React.FC = () => {
       console.log(json);
 
       setQuiz({
-        reference: 23,
+        reference: dayjs().week(),
         questions: []
       });
 
@@ -112,17 +119,13 @@ const CreateQuiz: React.FC = () => {
       <Row style={{ marginTop: 20 }}>
         <Col span={24} style={{ fontSize: 18 }}>Reference:
             <Select
-              defaultValue={23}
+              defaultValue={dayjs().week()}
               variant="borderless"
               size="large"
-              // style={{ width: "100%" }}
-              // onChange={handleAnswerTypeChange}
-              options={[
-                { value: 23, label: 'Week 23' },
-                { value: 24, label: 'Week 24', disabled: true }
-              ]}
+              options={referenceList}
+              onChange={handleReferenceChange}
             />
-            <div><small>You can create pools ahead of the time. Bear in mind that the last created pool was Week 22.</small></div>
+            <div><small>You can create pools ahead of the time. Bear in mind that the last created pool was Week {dayjs().subtract(7, "days").week()}.</small></div>
         </Col>
       </Row>
       {componentsList}
@@ -135,7 +138,6 @@ const CreateQuiz: React.FC = () => {
         <Col span={24}>
           <Button type="link" size="large" block onClick={handleAddQuestion}>Add another question</Button>
         </Col>
-        {/* {JSON.stringify(quiz)} */}
       </Row>
       <Row gutter={16} style={{ marginTop: 80 }}>
         <Col span={24} style={{ fontSize: 18, marginBottom: 20 }}>
