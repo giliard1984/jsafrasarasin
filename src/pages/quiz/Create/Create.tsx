@@ -107,8 +107,7 @@ const CreateQuiz: React.FC = () => {
     })
     .catch((e: Error) => {
       console.log(e);
-    })
-    .finally(() => console.log(false));
+    });
   };
 
   // by default we present the first question component

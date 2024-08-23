@@ -1,3 +1,6 @@
+export type Role = "admin" | "user";
+export type ComponentType = "radio" | "checkbox";
+
 export type Credential = {
   email: string | null
   password: string | null
@@ -6,7 +9,13 @@ export type Credential = {
 export type SignUp = {
   firstName: string | null
   lastName: string | null
+  role?: "admin" | "user"
 } & Credential;
+
+export type Account = {
+  id: string
+  createdAt: string
+} & SignUp & Credential
 
 export type Session = {
   email: string
@@ -15,8 +24,6 @@ export type Session = {
   createdAt: string
   loggedIn: string
 } & undefined;
-
-export type ComponentType = "radio" | "checkbox";
 
 export type PossibleAnswer = {
   value: string

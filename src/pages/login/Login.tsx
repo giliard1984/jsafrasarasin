@@ -43,7 +43,7 @@ const LoginPage: React.FC = () => {
     })
     .then(response => response.json())
     .then(json => {
-      const isValid = credential?.password ? doesPasswordMatch(credential.password, json[0]?.password) : false;
+      const isValid = credential?.password && json[0]?.password ? doesPasswordMatch(credential.password, json[0]?.password) : false;
 
       // TODO: if the credential is valid, then store it to the sessionStorage and ContextApi -> session
       // Not implementing at this point.
@@ -66,8 +66,7 @@ const LoginPage: React.FC = () => {
     })
     .catch((e: Error) => {
       console.log(e);
-    })
-    .finally(() => console.log(false));
+    });
   };
 
   const openNotification = (
@@ -96,6 +95,7 @@ const LoginPage: React.FC = () => {
           <Col span={24} className={styles.positionToLeft}>
             <label>Email</label>
             <Input
+              name="email"
               size="large"
               variant="filled"
               placeholder="Type your email"
@@ -107,6 +107,7 @@ const LoginPage: React.FC = () => {
           <Col span={24} className={styles.positionToLeft}>
             <label>Password</label>
             <Input.Password
+              name="password"
               size="large"
               variant="filled"
               placeholder="Type your password"

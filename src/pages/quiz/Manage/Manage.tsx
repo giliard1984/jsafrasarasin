@@ -24,8 +24,7 @@ const ManageQuiz: React.FC = () => {
     })
     .catch((e: Error) => {
       console.log(e);
-    })
-    .finally(() => console.log(false));
+    });
   }, []);
 
   return (
@@ -56,7 +55,11 @@ const ManageQuiz: React.FC = () => {
         {
           quizzes.map((quiz: Quiz) => {
             return (
-              <Col span={6} className={styles.minHeight}>
+              <Col
+                key={`quiz-statistic-${quiz.id}`}
+                span={6}
+                className={styles.minHeight}
+              >
                 <Card
                   title={`Week ${quiz.reference}`}
                   hoverable={false}
