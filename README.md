@@ -69,6 +69,8 @@ Please guarantee you have node 20+ installed on your machine.
 
 ![image](https://github.com/user-attachments/assets/1a97e43b-c737-4f86-b436-ffcfc11883b5)
 
+![image](https://github.com/user-attachments/assets/8c361894-3b48-4811-bace-49fe07155c79)
+
 ![image](https://github.com/user-attachments/assets/cffd53ab-e875-4a60-a9c8-674f913305bc)
 
 
