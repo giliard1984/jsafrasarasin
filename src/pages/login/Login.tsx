@@ -120,7 +120,7 @@ const LoginPage: React.FC = () => {
             <Button type="primary" size="large" block onClick={handleSignIn}>Sign in</Button>
           </Col>
           <Col span={24}>
-            <a>Don't have an account?</a>
+            <a onClick={() => navigate("/signup")}>Don't have an account?</a>
           </Col>
         </Row>
 

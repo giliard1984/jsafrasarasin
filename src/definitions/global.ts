@@ -3,6 +3,11 @@ export type Credential = {
   password: string | null
 };
 
+export type SignUp = {
+  firstName: string | null
+  lastName: string | null
+} & Credential;
+
 export type Session = {
   email: string
   firstName: string
