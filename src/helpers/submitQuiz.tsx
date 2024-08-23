@@ -10,7 +10,7 @@ export const submitQuiz = async (quiz: Quiz) => {
 
   quiz.questions.forEach((question: Question) => {
     if (question?.usersAnswers?.every((answer: string) => question.correctAnswers.includes(answer))) correct += 1;
-  })
+  });
 
   const response = await fetch(`http://localhost:5183/userPool/${quiz.id}`, {
     method: "PUT",
