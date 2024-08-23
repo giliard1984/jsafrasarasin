@@ -46,7 +46,7 @@ const QuizPage: React.FC = () => {
 
   // as soon as the questionsPools is updated, we select the first question
   useEffect(() => {
-    !currentQuestion && setCurrentQuestion(questionPool?.questions?.find((question: Question) => question.id === 1));
+    if (!currentQuestion) setCurrentQuestion(questionPool?.questions?.find((question: Question) => question.id === 1));
   }, [questionPool, currentQuestion]);
 
   // function responsible for acting when the user click on an specific answer
@@ -64,8 +64,8 @@ const QuizPage: React.FC = () => {
   const handleNextQuestion = () => {
     if (nextQuestionId <= totalQuestions) {
       setCurrentQuestion(questionPool?.questions?.find((question: Question) => question.id === nextQuestionId));
-    } else {
-      questionPool && submitQuiz(questionPool);
+    } else if (questionPool) {
+      submitQuiz(questionPool);
     }
   };
 

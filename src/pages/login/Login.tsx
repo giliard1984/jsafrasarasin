@@ -58,7 +58,11 @@ const LoginPage: React.FC = () => {
           loggedIn: dayjs().toISOString()
         } as Session);
 
-        json[0].role === "user" ? navigate("/quiz") : navigate("/quiz/manage");
+        if (json[0].role === "user") {
+          navigate("/quiz")
+        } else {
+          navigate("/quiz/manage");
+        }
       }
 
       // TODO: move openNotification to a helper function, so it is reusable

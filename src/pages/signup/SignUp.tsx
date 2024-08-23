@@ -41,7 +41,7 @@ const SignUpPage: React.FC = () => {
     // create the user's account, considering the user does exist
     // TODO: some controls should be moved to the backend, but processing them here at the moment
     createAccount(isAdmin, account).then((response: Account | Error | void) => {
-      if (response && response?.hasOwnProperty("id")) {
+      if (response && Object.prototype.hasOwnProperty.call(response, "id")) {
         setSession({
           email: (response as Account).email,
           firstName: (response as Account).firstName,
@@ -50,7 +50,11 @@ const SignUpPage: React.FC = () => {
           loggedIn: dayjs().toISOString()
         } as Session);
 
-        (response as Account).role === "user" ? navigate("/quiz") : navigate("/quiz/manage");
+        if ((response as Account).role === "user") {
+          navigate("/quiz");
+        } else {
+          navigate("/quiz/manage");
+        }
       }
     });
   };

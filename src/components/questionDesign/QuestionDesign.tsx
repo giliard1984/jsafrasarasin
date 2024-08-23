@@ -22,7 +22,7 @@ const QuestionDesign: React.FC<Props> = ({ questionNo, handleQuestionChanges }) 
 
   // adds the newly possible answer to the state, so it gets available for users to see as an option
   const handleAddPossibleAnswer = () => {
-    let element = (document.getElementById(`question-input-${questionNo}`) as HTMLInputElement)?.value;
+    const element = (document.getElementById(`question-input-${questionNo}`) as HTMLInputElement)?.value;
     setPossibleAnswers((oldArray: PossibleAnswer[]) => [...oldArray, { value: element, label: element }]);
     setPossibleAnswerInput(undefined);
   };
@@ -63,7 +63,7 @@ const QuestionDesign: React.FC<Props> = ({ questionNo, handleQuestionChanges }) 
         correctAnswers
       });
     }
-  }, [value, answerType, possibleAnswers, correctAnswers]);
+  }, [value, answerType, possibleAnswers, correctAnswers, handleQuestionChanges, questionNo]);
 
   return (
     <Row

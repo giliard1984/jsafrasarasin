@@ -4,7 +4,6 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
-  HomeOutlined,
   AppstoreAddOutlined,
 } from '@ant-design/icons';
 import { Outlet, useNavigate } from "react-router-dom";

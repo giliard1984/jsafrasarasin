@@ -212,5 +212,95 @@
       "createdAt": "2024-08-22T15:09:45.821Z"
     }
   ],
-  "userPool": []
+  "userPool": [
+    {
+      "id": "d87bff01-55f1-4d10-bae1-ea905105bc10",
+      "reference": 34,
+      "questions": [
+        {
+          "id": 1,
+          "type": "radio",
+          "question": "Which of the following empires had no written language: Incan, Aztec, Egyptian, Roman?",
+          "possibleAnswers": [
+            {
+              "value": "Incan",
+              "label": "Incan"
+            },
+            {
+              "value": "Aztec",
+              "label": "Aztec"
+            },
+            {
+              "value": "Egyptian",
+              "label": "Egyptian"
+            },
+            {
+              "value": "Roman",
+              "label": "Roman"
+            }
+          ],
+          "correctAnswers": [
+            "Incan"
+          ],
+          "usersAnswers": []
+        },
+        {
+          "id": 2,
+          "type": "radio",
+          "question": "What country has the most islands in the world?",
+          "possibleAnswers": [
+            {
+              "value": "Brazil",
+              "label": "Brazil"
+            },
+            {
+              "value": "Germany",
+              "label": "Germany"
+            },
+            {
+              "value": "Ireland",
+              "label": "Ireland"
+            },
+            {
+              "value": "Sweden",
+              "label": "Sweden"
+            }
+          ],
+          "correctAnswers": [
+            "Sweden"
+          ],
+          "usersAnswers": []
+        },
+        {
+          "id": 3,
+          "type": "radio",
+          "question": "What’s the smallest country in the world?",
+          "possibleAnswers": [
+            {
+              "value": "Denmark",
+              "label": "Denmark"
+            },
+            {
+              "value": "Russia",
+              "label": "Russia"
+            },
+            {
+              "value": "The Vatican",
+              "label": "The Vatican"
+            },
+            {
+              "value": "Italy",
+              "label": "Italy"
+            }
+          ],
+          "correctAnswers": [
+            "The Vatican"
+          ],
+          "usersAnswers": []
+        }
+      ],
+      "createdAt": "2024-08-23T10:01:37.700Z",
+      "userId": "3f66d43c-759a-483c-9ce0-91be8a36bb02"
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Row, Col, Button, Select, Statistic } from "antd";
 import { LikeOutlined, DislikeOutlined } from "@ant-design/icons";
 import PageTitle from "@/components/pageTitle/PageTitle";
@@ -49,7 +49,7 @@ const CreateQuiz: React.FC = () => {
   };
 
   // function that renders a new question component for the users to setup
-  const handleAddQuestion = () => {
+  const handleAddQuestion = useCallback(() => {
     const questionNo = componentsList.length + 1;
 
     setComponentsList(
@@ -61,7 +61,7 @@ const CreateQuiz: React.FC = () => {
         />
       )
     );
-  };
+  }, [componentsList]);
 
   // the purpose here is to state that a question has been fully configured
   // e.g. Question, possible and correct answers are provided
@@ -112,8 +112,8 @@ const CreateQuiz: React.FC = () => {
 
   // by default we present the first question component
   useEffect(() => {
-    componentsList?.length === 0 && handleAddQuestion();
-  }, [componentsList]);
+    if (componentsList?.length === 0) handleAddQuestion();
+  }, [componentsList, handleAddQuestion]);
 
   return (
     <>
