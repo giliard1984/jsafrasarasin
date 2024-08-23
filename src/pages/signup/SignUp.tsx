@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { AppContext } from "@contexts/AppContext";
 import { Row, Col, Input, Button, Checkbox, notification, type NotificationArgsProps, type CheckboxProps } from "antd";
-import { MailOutlined, LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
+import { MailOutlined, FieldStringOutlined, LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
 import type { SignUp, Account, Session } from "@definitions/global";
 import { createAccount } from "@helpers/createAccount";
 
@@ -101,7 +101,7 @@ const SignUpPage: React.FC = () => {
               size="large"
               variant="filled"
               placeholder="Type your first name"
-              addonBefore={<MailOutlined />}
+              addonBefore={<FieldStringOutlined />}
               status={isValidated !== undefined && !isValidated && account.firstName === null ? "error" : ""}
               onChange={(e) => setAccount((oldObj: SignUp) => ({ ...oldObj, firstName: e.target.value }))}
             />
@@ -113,7 +113,7 @@ const SignUpPage: React.FC = () => {
               size="large"
               variant="filled"
               placeholder="Type your last name"
-              addonBefore={<MailOutlined />}
+              addonBefore={<FieldStringOutlined />}
               status={isValidated !== undefined && !isValidated && account.lastName === null ? "error" : ""}
               onChange={(e) => setAccount((oldObj: SignUp) => ({ ...oldObj, lastName: e.target.value }))}
             />
