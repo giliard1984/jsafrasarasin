@@ -50,6 +50,8 @@ Please guarantee you have node 20+ installed on your machine.
 * Note: When logging as an admin, you will be taken on to the manage page. For you to be able, to create a new quiz, you can click on the create a new quiz card/button.
 * Note: When submitting the answers, JSON server is recording it twice, which causes problems to see the results. You might need to manually remove one of the entries at this point. I've added an item to fix it (Next steps).
 
+* There are two default users you can use: user@email.com and admin@email.com and their passwords are 123456
+
 
 ![image](https://github.com/user-attachments/assets/ebfd0475-ff0d-477f-845f-a6361f94abed)
 
@@ -67,6 +69,13 @@ Please guarantee you have node 20+ installed on your machine.
 
 ![image](https://github.com/user-attachments/assets/cffd53ab-e875-4a60-a9c8-674f913305bc)
 
+
+## Possible unit tests
+* [ ] Verify the login occurs accordingly, given a mock credential
+* [ ] Test the signup occurs as expected, given a mocked data
+* [ ] Test the admin can see 3 questions on the create a new quiz page
+* [ ] Test the admin can see the create button is enabled on the create a new quiz page, considering the questions are fully set
+* [ ] Test the user can see the first question when on the quiz page, given a question pool is assigned
 
 ## Next steps
 
