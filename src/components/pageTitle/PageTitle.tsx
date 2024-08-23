@@ -1,5 +1,7 @@
 import React from "react";
 
+import styles from "./PageTitle.module.scss";
+
 interface Props {
   title: string
   description?: string
@@ -8,7 +10,7 @@ interface Props {
 const PageTitle: React.FC<Props> = ({ title, description }) => {
   return (
     <>
-      <div style={{ fontSize: 26, fontWeight: 300 }}>{title}</div>
+      <div className={styles.title}>{title}</div>
       {description && <div>{description}</div>}
     </>
   );

@@ -1,10 +1,10 @@
 import React from "react";
-import { Menu, Layout, theme, ConfigProvider, FloatButton } from 'antd';
+import { /* Menu, */ Layout, theme, ConfigProvider, FloatButton } from 'antd';
 import { Outlet } from "react-router-dom";
 
 import styles from "./Default.module.scss";
 
-const { Header, Content } = Layout;
+const { /* Header, */ Content } = Layout;
 
 const DefaultLayout: React.FC = () => {
   const { token: { borderRadiusLG } } = theme.useToken(); // antd token
@@ -12,20 +12,23 @@ const DefaultLayout: React.FC = () => {
   return (
     // defining the layout theme
     <ConfigProvider
-      theme={{ components: { Layout: { bodyBg: "transparent", headerBg: "#fff" } } }}
+      theme={{ components: {
+        Layout: { bodyBg: "transparent", headerBg: "#fff" }
+      }}}
     >
-      <Header className={styles.header}>
+      {/* TODO: Header is not necessary at this point in time */}
+      {/* <Header className={styles.header}>
         <Menu
           theme="light"
           mode="horizontal"
           defaultSelectedKeys={['quiz']}
           items={[
-            { key: "quiz", label: "Quiz"},
-            { key: "history", label: "History", disabled: true}
+            { key: "quiz", label: "Quiz" },
+            { key: "history", label: "History", disabled: true }
           ]}
-          style={{ flex: 1, minWidth: 0, padding: "0px 20%" }}
+          className={styles.menu}
         />
-      </Header>
+      </Header> */}
       <Layout className={styles.layout}>
         <Content className={styles.content}>
           <div

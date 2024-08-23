@@ -1,9 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
-// const currentWeek = dayjs().week();
+import type { Quiz, Question } from "@definitions/global";
 
-export const assignQuestionPoolToUser = (userId: string, week: number) => {
-  fetch(`http://giliards-macbook-pro-2.local:5183/questionPools?reference=${week}`, {
+// when we make a call to this function, we already know the user has no valid pools associated
+// the purpose is to fetch the newest available question pool
+export const assignQuestionPoolToUser = async (userId: string, week: number) => {
+  const response = await fetch(`http://localhost:5183/questionPools?reference=${week}`, {
     method: "GET",
     headers: {
       "Accept": "application/json",
@@ -12,36 +14,35 @@ export const assignQuestionPoolToUser = (userId: string, week: number) => {
   })
   .then(response => response.json())
   .then(json => {
-    console.log(json[0]);
     addAssignmentToUserPool(userId, json[0]);
+    return json[0];
   })
   .catch((e: Error) => {
-    // TODO: handle the error message
     console.log(e);
   });
-  // .finally(() => console.log(false));
+  return response;
 };
 
-const addAssignmentToUserPool = (userId: string, questionPool: any) => {
-  console.log(userId, questionPool);
-  fetch(`http://giliards-macbook-pro-2.local:5183/userPool`, {
+// once received the question pool, we create a copy of it for the user, so they can answer the questions
+const addAssignmentToUserPool = async (userId: string, questionPool: Quiz) => {
+  await fetch(`http://localhost:5183/userPool`, {
     method: "POST",
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({...questionPool, id: uuidv4(), userId, createdAt: dayjs().toISOString()})
-  })
+    body: JSON.stringify({
+      ...questionPool,
+      id: uuidv4(),
+      userId,
+      questions: questionPool.questions.map((question: Question) => {
+        question.usersAnswers = [];
+        return question;
+      }),
+      createdAt: dayjs().toISOString()})
+    })
   .then(response => response.json())
-  .then(json => {
-    console.log(json);
-
-    // TODO: Fetch the required pool
-    // setQuestionPools(json[0]);
-  })
   .catch((e: Error) => {
-    // TODO: handle the error message
     console.log(e);
   });
-  // .finally(() => console.log(false));
 };

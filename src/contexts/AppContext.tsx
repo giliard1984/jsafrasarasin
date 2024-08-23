@@ -2,13 +2,13 @@
 // information related to the application
 import { createContext, useState } from "react";
 
-import type { Session } from "@definitions/global";
+import type { Session, Question } from "@definitions/global";
 
 const AppContextValue = {
   // loading: false,
   // error: null as Error | null,
   session: undefined as Session | undefined,
-  activeQuestionPool: {} as any,
+  activeQuestionPool: {} as Question | {},
   setSession: (_value: Session) => {},
   setActiveQuestionPool: (_value: string) => {},
  };

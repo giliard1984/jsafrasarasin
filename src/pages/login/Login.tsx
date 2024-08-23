@@ -1,11 +1,11 @@
 import React, { createContext, useState, useMemo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-// import useFetch from "@hooks/useFetch";
 import dayjs from "dayjs";
 import { AppContext } from "@contexts/AppContext";
 import { doesPasswordMatch } from "@/helpers/password";
 import { Row, Col, Input, Button, notification, type NotificationArgsProps } from "antd";
 import { MailOutlined, LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
+import type { Credential, Session } from "@definitions/global";
 
 import styles from "./Login.module.scss";
 
@@ -17,13 +17,11 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const [api, contextHolder] = notification.useNotification();
-  const [credential, setCredential] = useState({ email: null, password: null });
+  const [credential, setCredential] = useState<Credential>({ email: null, password: null });
   const [isValidated, setIsValidated] = useState<boolean | undefined>();
+
   // retrieved states and methods associated with the app context
   const {
-    // loading,
-    // error,
-    // session,
     setSession
   } = useContext(AppContext);
 
@@ -36,8 +34,7 @@ const LoginPage: React.FC = () => {
 
     // fetch the user's credential, considering the user does exist
     // moving this to the backend, the response should be an object instead of array of objects
-    // fetch(`http://localhost:5183/users?email=${credential.email}`, {
-    fetch(`http://giliards-macbook-pro-2.local:5183/users?email=${credential.email}`, {
+    fetch(`http://localhost:5183/users?email=${credential.email}`, {
       method: "GET",
       headers: {
         "Accept": "application/json",
@@ -46,10 +43,10 @@ const LoginPage: React.FC = () => {
     })
     .then(response => response.json())
     .then(json => {
-      // console.log(json);
-      const isValid = doesPasswordMatch(credential.password, json[0]?.password);
+      const isValid = credential?.password ? doesPasswordMatch(credential.password, json[0]?.password) : false;
 
       // TODO: if the credential is valid, then store it to the sessionStorage and ContextApi -> session
+      // Not implementing at this point.
 
       // when the credential has been verified, than based on the role, redirect them on to their page
       if (isValid) {     
@@ -59,15 +56,15 @@ const LoginPage: React.FC = () => {
           lastName: json[0].lastName,
           createdAt: json[0].createdAt,
           loggedIn: dayjs().toISOString()
-        });
+        } as Session);
 
-        json[0].role === "user" ? navigate("/quiz") : navigate("/admin-panel");
+        json[0].role === "user" ? navigate("/quiz") : navigate("/quiz/manage");
       }
 
+      // TODO: move openNotification to a helper function, so it is reusable
       openNotification("error", "Credential", "The requested email is unavailable", "topRight");
     })
     .catch((e: Error) => {
-      // TODO: handle the error message
       console.log(e);
     })
     .finally(() => console.log(false));
@@ -102,9 +99,9 @@ const LoginPage: React.FC = () => {
               size="large"
               variant="filled"
               placeholder="Type your email"
-              addonBefore={<MailOutlined style={{ color: "#000" }} />}
+              addonBefore={<MailOutlined />}
               status={isValidated !== undefined && !isValidated && credential.email === null ? "error" : ""}
-              onChange={(e) => setCredential((oldObj: any) => ({ ...oldObj, email: e.target.value }))}
+              onChange={(e) => setCredential((oldObj: Credential) => ({ ...oldObj, email: e.target.value }))}
             />
           </Col>
           <Col span={24} className={styles.positionToLeft}>
@@ -113,13 +110,13 @@ const LoginPage: React.FC = () => {
               size="large"
               variant="filled"
               placeholder="Type your password"
-              addonBefore={<LockOutlined style={{ color: "#000" }} />}
+              addonBefore={<LockOutlined />}
               iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
               status={isValidated !== undefined && !isValidated && credential.password === null ? "error" : ""}
-              onChange={(e) => setCredential((oldObj: any) => ({ ...oldObj, password: e.target.value }))}
+              onChange={(e) => setCredential((oldObj: Credential) => ({ ...oldObj, password: e.target.value }))}
             />
           </Col>
-          <Col span={24} style={{ marginTop: 20 }}>
+          <Col span={24} className="spaceTopSM">
             <Button type="primary" size="large" block onClick={handleSignIn}>Sign in</Button>
           </Col>
           <Col span={24}>

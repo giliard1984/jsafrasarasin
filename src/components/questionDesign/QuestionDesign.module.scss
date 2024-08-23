@@ -1,7 +1,6 @@
 .wrapper {
   margin-top: 30px;
   background-color: #fbfbfb;
-  /*border: "1px dashed #f2f2f2",*/
   padding: 20px 40px 40px 40px;
 
   p {
@@ -19,4 +18,14 @@
   border: 2px solid #f2f2f2;
   color: green;
   font-weight: 600;
+}
+
+.correctAnswerIcon {
+  color: green;
+  font-size: 20px;
+}
+
+.possibleAnswerInfo {
+  margin: 15px 0px;
+  font-size: 14px;
 }

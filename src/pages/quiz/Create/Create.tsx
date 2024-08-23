@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import { Row, Col, Button, Select, Statistic } from "antd";
 import { LikeOutlined, DislikeOutlined } from "@ant-design/icons";
 import PageTitle from "@/components/pageTitle/PageTitle";
@@ -7,16 +6,23 @@ import QuestionDesign from "@/components/questionDesign/QuestionDesign";
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import { v4 as uuidv4 } from "uuid";
+import type { Quiz, Question } from "@definitions/global";
+
+import styles from "./Create.module.scss";
 
 dayjs.extend(weekOfYear);
 
-const referenceList = Array.from({ length: 52}, (value, index) => ({ "value": index + 1, "label": `Week ${index + 1}`, "disabled": (index + 1) < dayjs().week() }));
+// defines the reference list, used as weeks
+const referenceList =
+  Array.from({ length: 52}, (_value: string, index: number) => ({
+    "value": index + 1,
+    "label": `Week ${index + 1}`,
+    "disabled": (index + 1) < dayjs().week()
+  }));
 
 const CreateQuiz: React.FC = () => {
-  // const navigate = useNavigate();
-
-  const [componentsList, setComponentsList] = useState([]); // list of components presented on the screen
-  const [quiz, setQuiz] = useState({
+  const [componentsList, setComponentsList] = useState<React.ReactElement[]>([]); // list of components presented on the screen
+  const [quiz, setQuiz] = useState<Pick<Quiz, "reference" | "questions">>({
     reference: dayjs().week(),
     questions: []
   });
@@ -27,12 +33,12 @@ const CreateQuiz: React.FC = () => {
 
   // listen for changes in the question design components, and update the quiz object
   // that will be the one being saved as a template
-  const handleQuestionChanges = (data: any) => {
+  const handleQuestionChanges = (data: Question): void => {
     setQuiz((oldObj: any) => ({
       ...oldObj,
-      questions: oldObj.questions.find((question: any) => question.id === data.id) ?
+      questions: oldObj.questions.find((question: Question) => question.id === Number(data.id)) ?
       [
-        ...oldObj.questions.filter((question: any) => question.id !== data.id),
+        ...oldObj.questions.filter((question: Question) => question.id !== Number(data.id)),
         data
       ] :
       [
@@ -42,10 +48,10 @@ const CreateQuiz: React.FC = () => {
     }));
   };
 
+  // function that renders a new question component for the users to setup
   const handleAddQuestion = () => {
     const questionNo = componentsList.length + 1;
 
-    // creates a new question component for the user to fill in
     setComponentsList(
       componentsList.concat(
         <QuestionDesign
@@ -57,6 +63,8 @@ const CreateQuiz: React.FC = () => {
     );
   };
 
+  // the purpose here is to state that a question has been fully configured
+  // e.g. Question, possible and correct answers are provided
   const fullyConfiguredQuestions = quiz.questions.reduce((total, question) => {
     if (question?.question && question?.possibleAnswers?.length > 0 && question?.correctAnswers?.length > 0) {
       total += 1;
@@ -65,6 +73,7 @@ const CreateQuiz: React.FC = () => {
     return total;
   }, 0);
 
+  // run a check to identify the total questions that are pending (missing some configuration)
   const pendingQuestions = quiz.questions.reduce((total, question) => {
     if (!question?.question || question?.possibleAnswers?.length === 0 || question?.correctAnswers?.length === 0) {
       total += 1;
@@ -73,8 +82,9 @@ const CreateQuiz: React.FC = () => {
     return total;
   }, 0);
 
+  // once the user has finished, they submit the quiz, that gets stored
   const handleSubmission = () => {
-    fetch(`http://giliards-macbook-pro-2.local:5183/questionPools`, {
+    fetch(`http://localhost:5183/questionPools`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -83,9 +93,7 @@ const CreateQuiz: React.FC = () => {
       body: JSON.stringify({...quiz, id: uuidv4(), createdAt: dayjs().toISOString()})
     })
     .then(response => response.json())
-    .then(json => {
-      console.log(json);
-
+    .then(() => {
       setQuiz({
         reference: dayjs().week(),
         questions: []
@@ -98,13 +106,12 @@ const CreateQuiz: React.FC = () => {
       // openNotification("info", "Success", "Your new quiz has been created", "topRight");
     })
     .catch((e: Error) => {
-      // TODO: handle the error message
       console.log(e);
     })
     .finally(() => console.log(false));
   };
 
-  // by the default we present the first question component
+  // by default we present the first question component
   useEffect(() => {
     componentsList?.length === 0 && handleAddQuestion();
   }, [componentsList]);
@@ -116,7 +123,7 @@ const CreateQuiz: React.FC = () => {
           <PageTitle title="Create a new Quiz" description="On this page you can setup a new quiz and even schedule when it should become available." />
         </Col>
       </Row>
-      <Row style={{ marginTop: 20 }}>
+      <Row className="spaceTopMD">
         <Col span={24} style={{ fontSize: 18 }}>Reference:
             <Select
               defaultValue={dayjs().week()}
@@ -133,14 +140,19 @@ const CreateQuiz: React.FC = () => {
         gutter={[5, 16]}
         justify="end"
         align="bottom"
-        style={{ marginTop: 50 }}
+        className="spaceTopMD"
       >
         <Col span={24}>
-          <Button type="link" size="large" block onClick={handleAddQuestion}>Add another question</Button>
+          <Button
+            type="link"
+            size="large"
+            block
+            onClick={handleAddQuestion}
+          >Add another question</Button>
         </Col>
       </Row>
-      <Row gutter={16} style={{ marginTop: 80 }}>
-        <Col span={24} style={{ fontSize: 18, marginBottom: 20 }}>
+      <Row gutter={16} className="spaceTopXL">
+        <Col span={24} className={styles.overview}>
           Overview
           <div><small>Bear in mind that questions not configured, are not taken into consideration.</small></div>
         </Col>
@@ -165,7 +177,7 @@ const CreateQuiz: React.FC = () => {
           />
         </Col>
       </Row>
-      <Row gutter={[16, 16]} justify="start" align="middle" style={{ marginTop: 50 }}>
+      <Row gutter={[16, 16]} justify="start" align="middle" className="spaceTopLG">
         <Col span={6}>
           Have you configured all the questions you wanted to? If so, you can hit the button create.
         </Col>

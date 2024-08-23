@@ -1,3 +1,43 @@
 #root {
   margin: 0 auto;
 }
+
+.block {
+  width: 100%;
+}
+
+.blockHeight {
+  min-height: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.black { 
+  color: #000;
+}
+
+.spaceTopSM {
+  margin-top: 10px;
+}
+
+.spaceTopMD {
+  margin-top: 30px;
+}
+
+.spaceTopLG {
+  margin-top: 50px;
+}
+
+.spaceTopXL {
+  margin-top: 100px;
+}
+
+.alignToLeft {
+  text-align: left;
+}
+
+.alignToRight {
+  text-align: right;
+}

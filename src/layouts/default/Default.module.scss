@@ -3,6 +3,12 @@
   padding: 0px;
 }
 
+.menu {
+  flex: 1;
+  min-width: 0px;
+  padding: 0px 20%;
+}
+
 .layout {
   display: flex;
   place-items: center;

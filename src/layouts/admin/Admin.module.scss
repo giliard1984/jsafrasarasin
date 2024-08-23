@@ -3,13 +3,45 @@
   padding: 0px;
   min-width: 100%;
   min-height: 100dvh;
-  // background-color: red;
+}
+
+.header {
+  padding-left: 70px;
+  padding-right: 70px;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.collapseButton {
+  font-size: 16px;
+  width: 56px !important;
+  height: 56px !important;
+}
+
+.siderImage {
+  width: 100%;
+  text-align: center;
+}
+
+.collapsedImage { 
+  width: 80px;
+  max-height: 64px;
+  object-fit: cover;
+}
+
+.expandedImage {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  height: 64px;
+  // border-bottom: 1px solid #16276c;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
 }
 
 .outletWrapper {
-  padding: 24px;
+  margin: 24px 80px;
+  min-height: 280px;
   background-color: #fff;
-  // max-width: 1280px;
-  // min-height: 90dvh;
-  // margin: 0 auto;
+
 }

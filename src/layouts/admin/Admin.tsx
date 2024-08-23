@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Layout, theme, ConfigProvider, Menu, Button, FloatButton } from 'antd';
+import React, { useState, useContext } from "react";
+import { Layout, ConfigProvider, Menu, Button, FloatButton } from 'antd';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -8,7 +8,7 @@ import {
   AppstoreAddOutlined,
 } from '@ant-design/icons';
 import { Outlet, useNavigate } from "react-router-dom";
-// import { AppContext } from "@contexts/AppContext";
+import { AppContext } from "@contexts/AppContext";
 
 import styles from "./Admin.module.scss";
 
@@ -16,20 +16,18 @@ const { Header, Sider, Content } = Layout;
 
 const AdminLayout: React.FC = () => {
   const navigate = useNavigate();
-
   const [collapsed, setCollapsed] = useState(false);
-  const { token: { colorBgContainer, borderRadiusLG } } = theme.useToken(); // antd token
 
   // retrieved states and methods associated with the app context
-  // const {
-  // } = useContext(AppContext);
+  const {
+    session
+  } = useContext(AppContext);
 
   return (
     // defining the layout theme
     <ConfigProvider
       theme={{ components: {
-        Layout: { bodyBg: "transparent", headerBg: "#fff"/*, siderBg: "#041b53"*/ },
-        // Menu: { darkItemBg: "#041b53" }
+        Layout: { bodyBg: "transparent", headerBg: "#fff" }
       } }}
     >
       <Layout className={styles.layout} hasSider>
@@ -38,32 +36,28 @@ const AdminLayout: React.FC = () => {
           collapsible
           collapsed={collapsed}
           breakpoint="sm"
-          width={250}
+          width={300}
         >
-          <div className="demo-logo-vertical" />
-            <div style={{ width: "100%", textAlign: "center" }}>
-              {
-                collapsed ?
-                  <img src="./jsafrasarasin-icon.jpg" style={{ width: "80px", maxHeight: "64px", objectFit: "cover" }} /> :
-                  // <img src="./jsafrasarasin-logo-dark.jpeg" style={{ width: "100%", maxHeight: "64px", objectFit: "fill" }} />
-                  <div style={{ fontSize: 24, fontWeight: "bold", color: "#fff", display: "flex", justifyContent: "center", alignItems:"center", height: "64px", borderBottom: "1px solid #16276c" }}>
-                    J. Safra Sarasin
-                  </div>
-              }
-            </div>
+          <div className={styles.siderImage}>
+            {
+              collapsed ?
+                <img src="./jsafrasarasin-icon.jpg" className={styles.collapsedImage} /> :
+                <div className={styles.expandedImage}>J. Safra Sarasin</div>
+            }
+          </div>
 
             {/* TODO: Move the onClick navigate to a lookup (switch) */}
             {/* TODO: If it is possible to extend the menu item to bring a new attr called url/path, that would be perfect */}
             <Menu
               theme="dark"
               mode="inline"
-              defaultSelectedKeys={['1']}
+              defaultSelectedKeys={['2']}
               items={[
-                {
-                  key: '1',
-                  icon: <HomeOutlined />,
-                  label: 'Home',
-                },
+                // {
+                //   key: '1',
+                //   icon: <HomeOutlined />,
+                //   label: 'Home',
+                // },
                 {
                   key: '2',
                   icon: <AppstoreAddOutlined />,
@@ -75,35 +69,22 @@ const AdminLayout: React.FC = () => {
                   label: 'Statistics',
                 },
               ]}
-              style={{ marginTop: 10 }}
+              className="spaceTopSM"
               onClick={({ key }) => key === "1" ? navigate("/admin-panel") : navigate("/quiz/manage")}
             />
         </Sider>
         <Layout>
-          <Header style={{ padding: "0px 16px", background: colorBgContainer, borderBottom: "1px solid #f6f6f6" }}>
+          <Header className={styles.header}>
             <Button
               type="text"
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               onClick={() => setCollapsed(!collapsed)}
-              style={{
-                marginLeft: 5,
-                fontSize: '16px',
-                width: 56,
-                height: 56,
-              }}
+              className={styles.collapseButton}
             />
+            {session && <span>{`${session?.firstName} ${session?.lastName} | ${session?.email}`}</span>}
           </Header>
           <Content>
-            <div
-              className={styles.outletWrapper}
-              style={{
-                margin: '24px 16px',
-                padding: 24,
-                minHeight: 280,
-                background: colorBgContainer,
-                borderRadius: borderRadiusLG,
-              }}
-            >
+            <div className={styles.outletWrapper}>
               <Outlet />
               <FloatButton.BackTop duration={550} visibilityHeight={800} />
             </div>
