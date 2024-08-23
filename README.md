@@ -54,9 +54,10 @@ Please guarantee you have node 20+ installed on your machine.
 * There are two default users you can use: user@email.com and admin@email.com and their passwords are 123456
 
 
+
 ![image](https://github.com/user-attachments/assets/ebfd0475-ff0d-477f-845f-a6361f94abed)
 
-![image](https://github.com/user-attachments/assets/26b075b2-878e-4278-9bc9-bfe2f0ed6cc9)
+![image](https://github.com/user-attachments/assets/efa106a2-0d86-4f45-b7ce-4660a7ad56f0)
 
 ![image](https://github.com/user-attachments/assets/d750cb47-ff49-4776-9244-e6ecf17d7ccb)
 
