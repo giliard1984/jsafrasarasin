@@ -49,6 +49,7 @@ Please guarantee you have node 20+ installed on your machine.
 
 * Note: When logging as an admin, you will be taken on to the manage page. For you to be able, to create a new quiz, you can click on the create a new quiz card/button.
 * Note: When submitting the answers, JSON server is recording it twice, which causes problems to see the results. You might need to manually remove one of the entries at this point. I've added an item to fix it (Next steps).
+* Note: I made the decision to use an UI library (antd), due to the time constraint, which allowed me to focus more on the business logic.
 
 * There are two default users you can use: user@email.com and admin@email.com and their passwords are 123456
 
