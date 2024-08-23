@@ -21,7 +21,6 @@ const Router = (): JSX.Element => {
         <Route path="/quiz" element={<QuizPage />} />
       </Route>
       <Route element={<AdminLayout />}>
-        {/* <Route path="/admin-panel" element={<div>this is the admin's page</div>} /> */}
         <Route path="/quiz/manage" element={<ManageQuiz />} />
         <Route path="/statistics" element={<div>this is the statistics page</div>} />
         <Route path="/quiz/create" element={<CreateQuiz />} />
