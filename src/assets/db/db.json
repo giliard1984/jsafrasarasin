@@ -68,8 +68,67 @@
       "createdAt": "2024-08-14T15:11:21.341Z"
     },
     {
-      "id": "d1fb902b-da82-4c3a-9c24-abe36247eaba",
+      "id": "075c2a1a-d7da-435c-ad33-2e1877b2fc09",
       "reference": 34,
+      "questions": [
+        {
+          "id": 1,
+          "type": "radio",
+          "question": "How many stripes are there on the US flag?",
+          "possibleAnswers": [
+            {
+              "value": "10",
+              "label": "10"
+            },
+            {
+              "value": "11",
+              "label": "11"
+            },
+            {
+              "value": "12",
+              "label": "12"
+            },
+            {
+              "value": "13",
+              "label": "13"
+            }
+          ],
+          "correctAnswers": [
+            "13"
+          ]
+        },
+        {
+          "id": 2,
+          "type": "radio",
+          "question": "What’s the national animal of Australia?",
+          "possibleAnswers": [
+            {
+              "value": "Red Kangaroo",
+              "label": "Red Kangaroo"
+            },
+            {
+              "value": "Brown Kangaroo",
+              "label": "Brown Kangaroo"
+            },
+            {
+              "value": "Red Lion",
+              "label": "Red Lion"
+            },
+            {
+              "value": "Toucan",
+              "label": "Toucan"
+            }
+          ],
+          "correctAnswers": [
+            "Red Kangaroo"
+          ]
+        }
+      ],
+      "createdAt": "2024-08-22T15:09:45.821Z"
+    },
+    {
+      "id": "d1fb902b-da82-4c3a-9c24-abe36247eaba",
+      "reference": 35,
       "questions": [
         {
           "id": 1,
@@ -151,156 +210,7 @@
         }
       ],
       "createdAt": "2024-08-22T11:13:00.217Z"
-    },
-    {
-      "id": "075c2a1a-d7da-435c-ad33-2e1877b2fc09",
-      "reference": 35,
-      "questions": [
-        {
-          "id": 1,
-          "type": "radio",
-          "question": "How many stripes are there on the US flag?",
-          "possibleAnswers": [
-            {
-              "value": "10",
-              "label": "10"
-            },
-            {
-              "value": "11",
-              "label": "11"
-            },
-            {
-              "value": "12",
-              "label": "12"
-            },
-            {
-              "value": "13",
-              "label": "13"
-            }
-          ],
-          "correctAnswers": [
-            "13"
-          ]
-        },
-        {
-          "id": 2,
-          "type": "radio",
-          "question": "What’s the national animal of Australia?",
-          "possibleAnswers": [
-            {
-              "value": "Red Kangaroo",
-              "label": "Red Kangaroo"
-            },
-            {
-              "value": "Brown Kangaroo",
-              "label": "Brown Kangaroo"
-            },
-            {
-              "value": "Red Lion",
-              "label": "Red Lion"
-            },
-            {
-              "value": "Toucan",
-              "label": "Toucan"
-            }
-          ],
-          "correctAnswers": [
-            "Red Kangaroo"
-          ]
-        }
-      ],
-      "createdAt": "2024-08-22T15:09:45.821Z"
     }
   ],
-  "userPool": [
-    {
-      "id": "d87bff01-55f1-4d10-bae1-ea905105bc10",
-      "reference": 34,
-      "questions": [
-        {
-          "id": 1,
-          "type": "radio",
-          "question": "Which of the following empires had no written language: Incan, Aztec, Egyptian, Roman?",
-          "possibleAnswers": [
-            {
-              "value": "Incan",
-              "label": "Incan"
-            },
-            {
-              "value": "Aztec",
-              "label": "Aztec"
-            },
-            {
-              "value": "Egyptian",
-              "label": "Egyptian"
-            },
-            {
-              "value": "Roman",
-              "label": "Roman"
-            }
-          ],
-          "correctAnswers": [
-            "Incan"
-          ],
-          "usersAnswers": []
-        },
-        {
-          "id": 2,
-          "type": "radio",
-          "question": "What country has the most islands in the world?",
-          "possibleAnswers": [
-            {
-              "value": "Brazil",
-              "label": "Brazil"
-            },
-            {
-              "value": "Germany",
-              "label": "Germany"
-            },
-            {
-              "value": "Ireland",
-              "label": "Ireland"
-            },
-            {
-              "value": "Sweden",
-              "label": "Sweden"
-            }
-          ],
-          "correctAnswers": [
-            "Sweden"
-          ],
-          "usersAnswers": []
-        },
-        {
-          "id": 3,
-          "type": "radio",
-          "question": "What’s the smallest country in the world?",
-          "possibleAnswers": [
-            {
-              "value": "Denmark",
-              "label": "Denmark"
-            },
-            {
-              "value": "Russia",
-              "label": "Russia"
-            },
-            {
-              "value": "The Vatican",
-              "label": "The Vatican"
-            },
-            {
-              "value": "Italy",
-              "label": "Italy"
-            }
-          ],
-          "correctAnswers": [
-            "The Vatican"
-          ],
-          "usersAnswers": []
-        }
-      ],
-      "createdAt": "2024-08-23T10:01:37.700Z",
-      "userId": "3f66d43c-759a-483c-9ce0-91be8a36bb02"
-    }
-  ]
+  "userPool": []
 }

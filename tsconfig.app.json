@@ -31,8 +31,9 @@
       "@helpers/*": ["src/helpers/*"],
       "@hooks/*": ["src/hooks/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@services/*": ["src/services/*"]
     },
   },
-  "include": ["src"]
+  "include": ["src", "vitest.setup.ts"]
 }

@@ -43,6 +43,7 @@ const SignUpPage: React.FC = () => {
     createAccount(isAdmin, account).then((response: Account | Error | void) => {
       if (response && Object.prototype.hasOwnProperty.call(response, "id")) {
         setSession({
+          id: (response as Account).id,
           email: (response as Account).email,
           firstName: (response as Account).firstName,
           lastName: (response as Account).lastName,

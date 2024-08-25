@@ -18,12 +18,13 @@ export type Account = {
 } & SignUp & Credential
 
 export type Session = {
+  id: string
   email: string
   firstName: string
   lastName: string
   createdAt: string
   loggedIn: string
-} & undefined;
+};
 
 export type PossibleAnswer = {
   value: string

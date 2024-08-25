@@ -20,7 +20,7 @@ type Props = {
 const AppContext = createContext(AppContextValue);
 
 const AppProvider = ({ children }: Props) => {
-  const [session, setSession] = useState(); // this is the user's session
+  const [session, setSession] = useState<Session | undefined>(); // this is the user's session
   const [activeQuestionPool, setActiveQuestionPool] = useState({});
 
   return (

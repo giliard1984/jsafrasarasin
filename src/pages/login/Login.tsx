@@ -2,6 +2,7 @@ import React, { createContext, useState, useMemo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { AppContext } from "@contexts/AppContext";
+import { fetchUserCredential } from "@/services/user.service";
 import { doesPasswordMatch } from "@/helpers/password";
 import { Row, Col, Input, Button, notification, type NotificationArgsProps } from "antd";
 import { MailOutlined, LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
@@ -34,16 +35,8 @@ const LoginPage: React.FC = () => {
 
     // fetch the user's credential, considering the user does exist
     // moving this to the backend, the response should be an object instead of array of objects
-    fetch(`http://localhost:5183/users?email=${credential.email}`, {
-      method: "GET",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      }
-    })
-    .then(response => response.json())
-    .then(json => {
-      const isValid = credential?.password && json[0]?.password ? doesPasswordMatch(credential.password, json[0]?.password) : false;
+    fetchUserCredential({ ...credential }).then(json => {
+      const isValid = credential?.password && json?.[0]?.password ? doesPasswordMatch(credential.password, json[0]?.password) : false;
 
       // TODO: if the credential is valid, then store it to the sessionStorage and ContextApi -> session
       // Not implementing at this point.
@@ -51,6 +44,7 @@ const LoginPage: React.FC = () => {
       // when the credential has been verified, than based on the role, redirect them on to their page
       if (isValid) {     
         setSession({
+          id: json[0].id,
           email: json[0].email,
           firstName: json[0].firstName,
           lastName: json[0].lastName,
@@ -67,8 +61,7 @@ const LoginPage: React.FC = () => {
 
       // TODO: move openNotification to a helper function, so it is reusable
       openNotification("error", "Credential", "The requested email is unavailable", "topRight");
-    })
-    .catch((e: Error) => {
+    }).catch((e: Error) => {
       console.log(e);
     });
   };
@@ -99,6 +92,7 @@ const LoginPage: React.FC = () => {
           <Col span={24} className={styles.positionToLeft}>
             <label>Email</label>
             <Input
+              data-testid="email-input"
               name="email"
               size="large"
               variant="filled"
@@ -111,6 +105,7 @@ const LoginPage: React.FC = () => {
           <Col span={24} className={styles.positionToLeft}>
             <label>Password</label>
             <Input.Password
+              data-testid="password-input"
               name="password"
               size="large"
               variant="filled"
@@ -122,7 +117,13 @@ const LoginPage: React.FC = () => {
             />
           </Col>
           <Col span={24} className="spaceTopSM">
-            <Button type="primary" size="large" block onClick={handleSignIn}>Sign in</Button>
+            <Button
+              data-testid="signin-button"
+              type="primary"
+              size="large"
+              block
+              onClick={handleSignIn}
+            >Sign in</Button>
           </Col>
           <Col span={24}>
             <a onClick={() => navigate("/signup")}>Don't have an account?</a>

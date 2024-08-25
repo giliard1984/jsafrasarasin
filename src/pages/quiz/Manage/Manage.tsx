@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Row, Col, Card } from "antd";
 import PageTitle from "@/components/pageTitle/PageTitle";
 import type { Quiz } from "@definitions/global";
+import { fetchAllQuizzes } from "@/services/questionPool.service";
 
 import styles from "./Manage.module.scss";
 
@@ -11,14 +12,7 @@ const ManageQuiz: React.FC = () => {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5183/questionPools`, {
-      method: "GET",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      }
-    })
-    .then(response => response.json())
+    fetchAllQuizzes()
     .then(json => {
       setQuizzes(json);
     })

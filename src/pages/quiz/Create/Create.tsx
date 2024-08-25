@@ -5,8 +5,8 @@ import PageTitle from "@/components/pageTitle/PageTitle";
 import QuestionDesign from "@/components/questionDesign/QuestionDesign";
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
-import { v4 as uuidv4 } from "uuid";
 import type { Quiz, Question } from "@definitions/global";
+import { addQuiz } from "@/services/questionPool.service";
 
 import styles from "./Create.module.scss";
 
@@ -84,15 +84,7 @@ const CreateQuiz: React.FC = () => {
 
   // once the user has finished, they submit the quiz, that gets stored
   const handleSubmission = () => {
-    fetch(`http://localhost:5183/questionPools`, {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({...quiz, id: uuidv4(), createdAt: dayjs().toISOString()})
-    })
-    .then(response => response.json())
+    addQuiz(quiz)
     .then(() => {
       setQuiz({
         reference: dayjs().week(),
