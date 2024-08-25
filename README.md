@@ -85,10 +85,10 @@ Please guarantee you have node 20+ installed on your machine.
 
 This section aims to express the points that are either missing, or should be implemented, for this project to function better.
 
-* [ ] BUG - When submitting the answers, JSON-server is duplicating the entry. It is necessary fixing it.
+* [X] BUG - When submitting the answers, JSON-server is duplicating the entry. It is necessary fixing it.
 * [ ] Make use of docker, so starting this project in a different machine should be smoother
 * [ ] Implement skeleton, so when loading the new data, we can see it in a more friendly way
-* [ ] Implement 1 or 2 unit tests
+* [X] Implement 1 or 2 unit tests
 * [ ] Apply minifier (Terser), so bundled product gets minified (smaller)
 * [ ] Implement JWT https://jwt.io/
 
